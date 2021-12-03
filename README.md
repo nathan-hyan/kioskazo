@@ -1,1 +1,1 @@
-# kioskazo
+# Kioskazo - Pre-Alpha state
