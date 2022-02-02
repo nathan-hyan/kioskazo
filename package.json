@@ -1,0 +1,66 @@
+{
+  "name": "project-trk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "nodemon -r tsconfig-paths/register ./index.ts",
+    "postinstall": "husky install && tsc",
+    "build": "tsc",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./build/index.js",
+    "lint": "eslint --ext .js --ext .ts --ext .tsx",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathan-hyan/project-trk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathan-hyan/project-trk/issues"
+  },
+  "homepage": "https://github.com/nathan-hyan/project-trk#readme",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/connect-mongodb-session": "^2.4.0",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.9",
+    "@types/express-session": "^1.17.3",
+    "@types/jest": "^26.0.20",
+    "@types/mongoose": "^5.10.3",
+    "@types/morgan": "^1.9.2",
+    "@types/node": "^14.14.20",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "husky": "^5.0.6",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.4.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.14",
+    "morgan": "^1.10.0",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.12.0"
+  },
+  "engines": {
+    "node": "15.3.0",
+    "npm": "7.0.14"
+  }
+}
