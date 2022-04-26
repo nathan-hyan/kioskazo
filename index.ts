@@ -11,7 +11,7 @@ import Users from '@routes/Users';
 import Products from '@routes/Products';
 import Sells from '@routes/Sells';
 import Stores from '@routes/Stores';
-import { SESSION_CONFIG } from '@constants/sessionConfig';
+import { ROUTE, SESSION_CONFIG } from '@constants/sessionConfig';
 
 console.clear();
 
@@ -25,10 +25,10 @@ app.use(handleError);
 app.set('trust proxy', 1);
 app.use(session(SESSION_CONFIG));
 
-app.use('/api/v1/users', Users);
-app.use('/api/v1/products', Products);
-app.use('/api/v1/sells', Sells);
-app.use('/api/v1/stores', Stores);
+app.use(`${ROUTE}/users`, Users);
+app.use(`${ROUTE}/products`, Products);
+app.use(`${ROUTE}/sells`, Sells);
+app.use(`${ROUTE}/stores`, Stores);
 
 app.listen(PORT, () => {
   console.log(`🦋 >> ${PORT}`);
