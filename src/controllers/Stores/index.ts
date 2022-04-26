@@ -22,7 +22,7 @@ const getSingleStore = (req: Request, res: Response, next: NextFunction) => {
 
     // Stores.findOne({ _id: req.params.id })
     //   .populate('Users')
-    .then((response: any) => {
+    .then((response) => {
       res.send({ success: true, response });
     })
     .catch((err: ErrorResponse) => {

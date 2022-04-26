@@ -21,9 +21,8 @@ async function checkForStock(cartProducts: CartProduct[]) {
   const ALL_PRODUCTS = await Products.find({}, 'name stock');
   const found: CartProduct[] = [];
 
-  // eslint-disable-next-line array-callback-return
-  cartProducts.map((cartItem: CartProduct): void => {
-    found.push(
+  cartProducts.map((cartItem: CartProduct) => {
+    return found.push(
       ALL_PRODUCTS.find(
         (item: CustomProductResponse) =>
           item._id.toString() === cartItem.item.toString() && item.stock < cartItem.quantity,

@@ -23,8 +23,8 @@ interface SessionConfig {
 }
 
 export const SESSION_CONFIG: SessionConfig = {
-  name: 'hyanid',
-  secret: process.env.KEY!,
+  name: 'trkSession',
+  secret: process.env.KEY || '',
   resave: false,
   saveUninitialized: false,
   cookie: {
