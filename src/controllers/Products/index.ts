@@ -1,5 +1,6 @@
 import createError from '@helpers/createError';
 import { ErrorResponse } from '@interfaces/error';
+import { Product } from '@interfaces/product';
 import Products from '@models/Products';
 import { NextFunction, Request, Response } from 'express';
 
@@ -24,14 +25,22 @@ const getSingleProduct = (req: Request, res: Response, next: NextFunction) => {
 };
 
 const createProduct = async (req: Request, res: Response, next: NextFunction) => {
-  const newProduct = new Products({ ...req.body, storeId: req.session.storeId });
-  return newProduct
-    .save()
-    .then(() => {
-      res.send({ success: true, message: 'Product created successfully' });
-    })
-    .catch((err) => {
-      createError(next, res, err.message, err.status);
+  Products.findOne()
+    .sort({ internalId: -1 })
+    .then((response: Product) => {
+      const newProduct = new Products({
+        ...req.body,
+        internalId: response.internalId + 1,
+        storeId: req.session.storeId,
+      });
+      return newProduct
+        .save()
+        .then(() => {
+          res.send({ success: true, message: 'Product created successfully' });
+        })
+        .catch((err) => {
+          createError(next, res, err.message, err.status);
+        });
     });
 };
 
