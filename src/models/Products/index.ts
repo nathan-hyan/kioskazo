@@ -4,8 +4,12 @@ import { model, Schema } from 'mongoose';
 const Products: Schema = new Schema(
   {
     name: { type: String, required: true },
-    price: { type: Number, required: false, default: 0 },
-    cost: { type: Number, required: true, default: 0 },
+    price: {
+      list: { type: Number, required: true, default: 0 },
+      onlineStore: { type: Number, required: true, default: 0 },
+      cash: { type: Number, required: true, default: 0 },
+      cost: { type: Number, required: true, default: 0 },
+    },
     internalId: { type: Number, required: true, default: 0 },
     stock: { type: Number, required: false, default: 0 },
     category: { type: String, required: true },
