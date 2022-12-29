@@ -34,6 +34,7 @@ const createProduct = async (req: Request, res: Response, next: NextFunction) =>
     .then((response: Product) => {
       const newProduct = new Products({
         ...req.body,
+        price: { ...req.body.price, lastModified: new Date() },
         internalId: response.internalId + 1,
         storeId: req.session.storeId,
       });

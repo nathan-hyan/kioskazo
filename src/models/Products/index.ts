@@ -38,6 +38,7 @@ const Products: Schema = new Schema(
       onlineStore: { type: Number, required: true, default: 0 },
       cash: { type: Number, required: true, default: 0 },
       cost: { type: Number, required: true, default: 0 },
+      lastModified: { type: Date, required: true },
     },
     internalId: { type: Number, required: true, default: 0 },
     image: { type: String, required: false },
