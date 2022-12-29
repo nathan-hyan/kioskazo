@@ -11,7 +11,7 @@ import { NextFunction, Response } from 'express';
 
 const createError = (next: NextFunction, res: Response, message: string, status = 500) => {
   try {
-    res.status(status).send(message);
+    res.status(status).json({ success: false, statusCode: status, error: message });
     throw new Error(`⚡️ >> ${message} || ${status}`);
   } catch (e: any) {
     e.status = status;

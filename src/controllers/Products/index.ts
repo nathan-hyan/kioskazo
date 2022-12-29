@@ -17,7 +17,11 @@ const getProducts = (req: Request, res: Response, next: NextFunction) => {
 const getSingleProduct = (req: Request, res: Response, next: NextFunction) => {
   Products.findOne({ storeId: req.session.storeId, _id: req.params.id })
     .then((response: Response) => {
-      res.send({ success: true, response });
+      if (response) {
+        res.send({ success: true, response });
+      } else {
+        createError(next, res, 'Product not found', 404);
+      }
     })
     .catch((err: ErrorResponse) => {
       createError(next, res, err.message, err.status);
