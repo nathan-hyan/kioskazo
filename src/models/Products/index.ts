@@ -7,7 +7,12 @@ const Products: Schema = new Schema(
     stock: { type: Number, required: false, default: 0 },
     barcode: { type: String, required: true },
     category: { type: String, required: true },
-    provider: { type: String, required: false },
+    provider: [
+      {
+        id: { type: Number, required: false },
+        name: { type: Number, required: false },
+      },
+    ],
     brand: { type: String, required: false },
     businessOwner: { type: String, required: false },
     dimensions: {

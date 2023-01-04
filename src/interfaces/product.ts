@@ -31,6 +31,10 @@ export interface Product extends Document {
   storeBranch: string;
   storeId: ObjectId;
   storePosition: string;
+  providerProductCode: {
+    id: number;
+    name: string;
+  }[];
   description: string;
   specifications: {
     title: string;
