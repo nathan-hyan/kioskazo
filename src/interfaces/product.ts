@@ -23,7 +23,6 @@ export interface Product extends Document {
   stock: number;
   barcode: string;
   category: string;
-  provider: string;
   brand: string;
   businessOwner: string;
   dimensions: Dimensions;
