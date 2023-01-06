@@ -3,9 +3,12 @@ import { ErrorResponse } from '@interfaces/error';
 import { Product } from '@interfaces/product';
 import Products from '@models/Products';
 import { NextFunction, Request, Response } from 'express';
+import { sorter } from './utils';
 
 const getProducts = (req: Request, res: Response, next: NextFunction) => {
   Products.find({ storeId: req.session.storeId })
+    .collation({ locale: 'en', strength: 2 })
+    .sort([sorter(req.query.sort as string)])
     .then((response: Response) => {
       res.send({ success: true, response });
     })
