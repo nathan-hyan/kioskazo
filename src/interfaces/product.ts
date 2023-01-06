@@ -11,6 +11,7 @@ interface Price {
   onlineStore: number;
   cash: number;
   cost: number;
+  lastModified?: Date;
 }
 
 interface Dimensions {
@@ -23,6 +24,7 @@ export interface Product extends Document {
   stock: number;
   barcode: string;
   category: string;
+  subCategory?: string;
   brand: string;
   businessOwner: string;
   dimensions: Dimensions;
