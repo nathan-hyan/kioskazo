@@ -76,10 +76,27 @@ const deleteProduct = (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
+const doIdForProducts = async (req: Request, res: Response) => {
+  let id = 0;
+
+  const products = await Products.find({ storeId: req.session.storeId });
+
+  products.forEach(async (product: Product) => {
+    console.log('Processing', `"${product.name}"`, 'with id:', id);
+    Products.findOneAndUpdate({ name: product.name }, { internalId: id }).then((response: Product) =>
+      console.log('Finished', response.name),
+    );
+    id += 1;
+  });
+
+  res.json({ success: true, message: 'Done' });
+};
+
 export default {
   getProducts,
   getSingleProduct,
   createProduct,
   editProduct,
   deleteProduct,
+  doIdForProducts,
 };

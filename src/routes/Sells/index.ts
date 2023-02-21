@@ -1,13 +1,14 @@
 import express from 'express';
 import Sells from '@controllers/Sells';
 import isAuth from 'middlewares/isAuth';
+import { UserAuthLevel } from '@constants/userTypes';
 
 const router = express.Router();
 
-router.get('/get', isAuth as never, Sells.getSellList);
-router.get('/getSingle/:id', isAuth as never, Sells.getSell);
-router.post('/create', isAuth as never, Sells.createSell);
-router.put('/edit/:id', isAuth as never, Sells.editSell);
-router.delete('/delete/:id', isAuth as never, Sells.deleteSell);
+router.get('/get', isAuth(UserAuthLevel.STORE_OWNER), Sells.getSellList);
+router.get('/getSingle/:id', isAuth(UserAuthLevel.STORE_OWNER), Sells.getSell);
+router.post('/create', isAuth(UserAuthLevel.STORE_OWNER), Sells.createSell);
+router.put('/edit/:id', isAuth(UserAuthLevel.STORE_OWNER), Sells.editSell);
+router.delete('/delete/:id', isAuth(UserAuthLevel.STORE_OWNER), Sells.deleteSell);
 
 export = router;

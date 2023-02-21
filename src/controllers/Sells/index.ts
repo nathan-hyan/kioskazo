@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import createError from '@helpers/createError';
 import Products from '@models/Products';
 import { Product } from '@interfaces/product';

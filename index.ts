@@ -11,6 +11,7 @@ import Users from '@routes/Users';
 import Products from '@routes/Products';
 import Sells from '@routes/Sells';
 import Stores from '@routes/Stores';
+import Test from '@routes/Test';
 import { ROUTE, SESSION_CONFIG } from '@constants/sessionConfig';
 
 console.clear();
@@ -29,6 +30,7 @@ app.use(`${ROUTE}/users`, Users);
 app.use(`${ROUTE}/products`, Products);
 app.use(`${ROUTE}/sells`, Sells);
 app.use(`${ROUTE}/stores`, Stores);
+app.use(`${ROUTE}/test`, Test);
 
 app.listen(PORT, () => {
   console.log(`🦋 >> ${PORT}`);

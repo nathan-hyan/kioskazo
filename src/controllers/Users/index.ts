@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import createError from '@helpers/createError';
@@ -7,12 +6,14 @@ import Users from '@models/Users';
 import { ObjectId } from 'mongoose';
 import { ErrorResponse } from '@interfaces/error';
 import Stores from '@models/Stores';
+import { UserAuthLevel } from '@constants/userTypes';
 import { MESSAGES } from './constants';
 
 declare module 'express-session' {
   interface Session {
     isAuth: boolean;
     storeId: ObjectId;
+    type: UserAuthLevel;
   }
 }
 
@@ -72,6 +73,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     if (!error && response) {
       req.session.isAuth = true;
       req.session.storeId = userExist.storeId;
+      req.session.type = userExist.type;
       return res.status(200).json({ success: true, username: userExist.name, id: userExist._id });
     }
     return createError(next, res, MESSAGES.error, 401);
