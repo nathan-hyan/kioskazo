@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import createError from '@helpers/createError';
-import _User from '@interfaces/users';
+import User from '@interfaces/users';
 import Users from '@models/Users';
 import { ObjectId } from 'mongoose';
 import { ErrorResponse } from '@interfaces/error';
@@ -17,8 +17,23 @@ declare module 'express-session' {
   }
 }
 
+const getUsers = async (req: Request, res: Response) => {
+  const unfilteredUserList = await Users.find();
+  const userList: { username: string; name: string; _id: string }[] = [];
+
+  unfilteredUserList.forEach((user: User) => {
+    userList.push({
+      username: user.username,
+      name: user.name,
+      _id: user._id,
+    });
+  });
+
+  res.json({ success: true, response: userList });
+};
+
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  const userExist = await Users.findOne({ DNI: req.body.DNI });
+  const userExist = await Users.findOne({ username: req.body.username });
 
   if (!userExist) {
     bcrypt.hash(req.body.password, 8, (hashError, hash) => {
@@ -36,7 +51,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
         return newUser
           .save()
-          .then(async (response: _User) => {
+          .then(async (response: User) => {
             if (req.body.storeId) {
               const CURRENT_STORE = await Stores.findOne({ _id: req.body.storeId });
 
@@ -61,9 +76,9 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const loginUser = async (req: Request, res: Response, next: NextFunction) => {
-  const { DNI, password } = req.body;
+  const { username, password } = req.body;
 
-  const userExist = await Users.findOne({ DNI });
+  const userExist = await Users.findOne({ username });
 
   if (!userExist) {
     return createError(next, res, MESSAGES.error, 401);
@@ -82,7 +97,7 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
   req.session.destroy((err) => {
-    if (err) createError(next, res, 'jajaj', 500);
+    if (err) createError(next, res, 'No entiendo cómo esto se pudo romper...', 500);
     res.send({ success: true });
   });
 };
@@ -108,6 +123,7 @@ const editUser = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
+  getUsers,
   createUser,
   deleteUser,
   editUser,

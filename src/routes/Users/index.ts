@@ -5,6 +5,7 @@ import { UserAuthLevel } from '@constants/userTypes';
 
 const router = express.Router();
 
+router.get('/get', isAuth(UserAuthLevel.ADMIN), Users.getUsers);
 router.post('/create', isAuth(UserAuthLevel.ADMIN), Users.createUser);
 router.put('/edit/:id', isAuth(UserAuthLevel.ADMIN), Users.editUser);
 router.delete('/delete/:id', isAuth(UserAuthLevel.ADMIN), Users.deleteUser);

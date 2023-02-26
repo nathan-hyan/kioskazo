@@ -6,7 +6,7 @@ import { NextFunction, Request, Response } from 'express';
 import { sorter } from './utils';
 
 const getProducts = (req: Request, res: Response, next: NextFunction) => {
-  Products.find({ storeId: req.session.storeId })
+  Products.find({ storeId: req.session.storeId || undefined })
     .collation({ locale: 'en', strength: 2 })
     .sort([sorter(req.query.sort as string)])
     .then((response: Response) => {

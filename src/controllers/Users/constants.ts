@@ -1,4 +1,4 @@
 export const MESSAGES = {
-  error: 'DNI or password invalid',
+  error: 'Username or password invalid',
   alreadyExist: 'User already exist',
 };

@@ -7,7 +7,7 @@ import { UserAuthLevel } from '@constants/userTypes';
 const UserSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
-    DNI: { type: Number, required: true },
+    username: { type: String, required: true },
     password: { type: String, required: true },
     type: { type: UserAuthLevel, required: true, default: UserAuthLevel.EMPLOYEE },
     storeId: { type: Schema.Types.ObjectId, ref: 'Stores', required: false },
