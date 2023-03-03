@@ -89,7 +89,10 @@ const loginUser = async (req: Request, res: Response, next: NextFunction) => {
       req.session.isAuth = true;
       req.session.storeId = userExist.storeId;
       req.session.type = userExist.type;
-      return res.status(200).json({ success: true, username: userExist.name, id: userExist._id });
+      console.log(userExist);
+      return res
+        .status(200)
+        .json({ success: true, username: userExist.name, id: userExist._id, authLevel: userExist.type });
     }
     return createError(next, res, MESSAGES.error, 401);
   });
